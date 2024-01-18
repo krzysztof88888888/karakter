@@ -9,6 +9,7 @@
 if (isset($_POST['username'])) {
     $hashedPassword = md5($_POST['password']);
 
+
     $query = "INSERT INTO `karakter`.`user` (
                `id`, 
                `username`, 
