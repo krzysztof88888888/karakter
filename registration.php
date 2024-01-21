@@ -3,11 +3,12 @@
 // echo $_GET['p'];
 // echo $_POST['p'];
 
-
-
-
 if (isset($_POST['username'])) {
-    $hashedPassword = md5($_POST['password']);
+
+    $hashedPassword = hashMyPassword($_POST['password']);
+    if(false == doesEmailContainNetmark($_POST['username'])){
+        die("To nie jest adres email");
+    }
 
 
     $query = "INSERT INTO `karakter`.`user` (
@@ -102,7 +103,7 @@ else{
     ?>
     <form method="POST">
     <label for="email">E-mail:</label>
-    <input type="email" id="email" name="username" required>
+    <input type="text" id="email" name="username" required>
 
     <label for="password">Hasło:</label>
     <input type="password" id="password" name="password" required>

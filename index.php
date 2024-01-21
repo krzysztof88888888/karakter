@@ -3,7 +3,8 @@
 
 <?php
 
-include("conf.php");
+	include("conf.php");
+	include("functions.php");
 
 	switch ($_GET['p']) 
 	{
