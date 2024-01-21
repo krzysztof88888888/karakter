@@ -10,6 +10,8 @@ if (isset($_POST['username'])) {
         die("To nie jest adres email");
     }
 
+    // validate password here
+
 
     $query = "INSERT INTO `karakter`.`user` (
                `id`, 
