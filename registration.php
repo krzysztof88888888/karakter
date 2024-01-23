@@ -10,8 +10,10 @@ if (isset($_POST['username'])) {
         die("To nie jest adres email");
     }
 
-    // validate password here
-
+    $areEnteredPasswordsIdentical = areEnteredPasswordsIdentical($_POST['password'], $_POST['secondPassword']);
+    if(!$areEnteredPasswordsIdentical){
+        die("Hasła nie są identyczne");
+    }
 
     $query = "INSERT INTO `karakter`.`user` (
                `id`, 
@@ -109,6 +111,9 @@ else{
 
     <label for="password">Hasło:</label>
     <input type="password" id="password" name="password" required>
+
+    <label for="password">Powtórz hasło:</label>
+    <input type="password" id="password" name="secondPassword" required>
 
     <button type="submit">Zarejestruj się</button>
 </form>
