@@ -5,15 +5,30 @@
 
 if (isset($_POST['username'])) {
 
+
+
+
     $hashedPassword = hashMyPassword($_POST['password']);
     if(false == doesEmailContainNetmark($_POST['username'])){
-        die("To nie jest adres email");
+        $komunikat = "To nie jest adres email";
     }
 
-    $areEnteredPasswordsIdentical = areEnteredPasswordsIdentical($_POST['password'], $_POST['secondPassword']);
-    if(!$areEnteredPasswordsIdentical){
-        die("Hasła nie są identyczne");
+
+    if(!areEnteredPasswordsIdentical($_POST['password'], $_POST['secondPassword'])){
+        $komunikat = "Hasła nie są identyczne";
     }
+
+
+    if(!minCharacterPassword($_POST['password'])){
+        $komunikat = "Za krótkie hasło";
+    }
+
+    if(!maxCharacterPassword($_POST['password'])){
+        $komunikat = "Za długie hasło";
+    }
+
+
+
 
     $query = "INSERT INTO `karakter`.`user` (
                `id`, 
@@ -105,6 +120,15 @@ if(isset($userAdded)){
 }
 else{
     ?>
+
+        <div style="width: 100%; display: block; color: red;">
+
+            <?php
+                echo $komunikat;
+            ?>
+        </div>
+
+
     <form method="POST">
     <label for="email">E-mail:</label>
     <input type="text" id="email" name="username" required>
